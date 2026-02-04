@@ -7,7 +7,6 @@
   </h1>
 </a>
 
-# Flutter-termux
 
 Run the Flutter SDK directly on your Android device using the Termux terminal emulator.
 
@@ -18,7 +17,7 @@ Open Termux and run the following command:
 ```bash
 apt install flutter -y
 ```
-> Note make sureyou have termuxvoid in your source
+> Note make sure you have termuxvoid in your source
 
 ## 📺 Tutorial
 
