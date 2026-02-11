@@ -1,5 +1,3 @@
-[file name]: main.js
-[file content begin]
 const TelegramBot = require("node-telegram-bot-api");
 const { spawn } = require("child_process");
 const path = require("path");
