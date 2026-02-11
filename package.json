@@ -15,7 +15,9 @@
     "randomstring": "",
     "puppeteer-real-browser": "",
     "express": "",
-    "cors": ""
+    "cors": "",
+    "crypto": "",
+    "cluster": ""
   },
   "engines": {
     "node": ">=16.0.0"
