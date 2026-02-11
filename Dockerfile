@@ -1,23 +1,20 @@
 FROM node:18-slim
 
-# Install dependencies
+# Install dependencies for Chrome
 RUN apt-get update \
     && apt-get install -y wget gnupg ca-certificates \
     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
     && apt-get update \
-    && apt-get install -y google-chrome-stable xvfb \
-    fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf \
-    libxss1 --no-install-recommends \
+    && apt-get install -y google-chrome-stable xvfb fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-# Create app directory
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies - QUAN TRỌNG: không dùng ^0.1.1
 RUN npm install
 
 # Copy source code
@@ -27,5 +24,5 @@ COPY . .
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
 
-# Start command
-CMD ["sh", "-c", "Xvfb :99 -ac & export DISPLAY=:99 && node main.js"]
+# Start bot with Xvfb
+CMD Xvfb :99 -ac -screen 0 1280x1024x24 & export DISPLAY=:99 && node main.js
