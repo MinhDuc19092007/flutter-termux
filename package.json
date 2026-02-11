@@ -1,25 +1,24 @@
 {
   "name": "telegram-bot-attack",
-  "version": "1.0.0",
-  "description": "Telegram Bot for testing",
+  "version": "1.1.0",
+  "description": "Telegram Bot for testing - Optimized Version",
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
     "dev": "nodemon main.js"
   },
   "dependencies": {
-    "node-telegram-bot-api": "",
-    "http": "",
-    "https": "",
-    "hpack": "",
-    "randomstring": "",
-    "puppeteer-real-browser": "",
-    "express": "",
-    "cors": "",
-    "crypto": "",
-    "cluster": ""
+    "node-telegram-bot-api": "^0.66.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "puppeteer-real-browser": "^1.2.6",
+    "randomstring": "^1.3.0",
+    "hpack.js": "^2.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=18.0.0"
   }
 }
