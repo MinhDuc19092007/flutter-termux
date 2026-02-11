@@ -7,7 +7,7 @@ const express = require("express");
 const cors = require("cors");
 
 // ==================== CẤU HÌNH ====================
-const BOT_TOKEN = process.env.BOT_TOKEN || "7983734590:AAGoDuaSDiIQ5zaDuP1XhoCd3upAnS1UNsE";
+const BOT_TOKEN = process.env.BOT_TOKEN || "6382382620:AAFkTfdDxZJoK7g1DAdyle-22f-K62eLuWE";
 const ADMIN_ID = 5845508484;
 const PROXY_FILE = "proxy.txt";
 const BLACKLIST_FILE = "blacklist.txt"; // File chứa danh sách blacklist
