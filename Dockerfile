@@ -6,7 +6,16 @@ RUN apt-get update \
     && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
     && apt-get update \
-    && apt-get install -y google-chrome-stable xvfb fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 --no-install-recommends \
+    && apt-get install -y \
+        google-chrome-stable \
+        xvfb \
+        fonts-ipafont-gothic \
+        fonts-wqy-zenhei \
+        fonts-thai-tlwg \
+        fonts-kacst \
+        fonts-freefont-ttf \
+        libxss1 \
+        --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -14,14 +23,15 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies - QUAN TRỌNG: không dùng ^0.1.1
+# Install dependencies
 RUN npm install
 
 # Copy source code
 COPY . .
 
-# Create non-root user
+# Create non-root user (FIXED)
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+
 USER appuser
 
 # Start bot with Xvfb
