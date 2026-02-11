@@ -9,7 +9,7 @@ const express = require("express");
 const cors = require("cors");
 
 // ==================== CẤU HÌNH ====================
-const BOT_TOKEN = process.env.BOT_TOKEN || "7983734590:AAGoDuaSDiIQ5zaDuP1XhoCd3upAnS1UNsE";
+const BOT_TOKEN = process.env.BOT_TOKEN || "6382382620:AAEpTa3kf_1BynreMOphAukv7Xi1OF15z_g";
 const ADMIN_ID = 5845508484; // ID của bạn (admin)
 const PROXY_FILE = "proxy.txt";
 
