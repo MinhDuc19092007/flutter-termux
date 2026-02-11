@@ -1,12 +1,12 @@
 FROM node:18-slim
 
-# Install dependencies for Chrome
+# Cài đặt dumb-init để quản lý process và các dependencies cho Chrome
 RUN apt-get update \
-    && apt-get install -y wget gnupg ca-certificates \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
-    && apt-get update \
     && apt-get install -y \
+        wget \
+        gnupg \
+        ca-certificates \
+        dumb-init \
         google-chrome-stable \
         xvfb \
         fonts-ipafont-gothic \
@@ -16,23 +16,28 @@ RUN apt-get update \
         fonts-freefont-ttf \
         libxss1 \
         --no-install-recommends \
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
     && rm -rf /var/lib/apt/lists/*
 
+# Tạo thư mục làm việc
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies
+# Copy package files và cài đặt với quyền user 'node'
+COPY --chown=node:node package*.json ./
 RUN npm install
 
-# Copy source code
-COPY . .
+# Copy toàn bộ code và phân quyền cho user 'node'
+COPY --chown=node:node . .
 
-# Create non-root user (FIXED)
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+# Sử dụng user 'node' (UID 1000) có sẵn trong image
+USER node
 
-USER appuser
+# Thiết lập biến môi trường cho Display
+ENV DISPLAY=:99
 
-# Start bot with Xvfb
-CMD Xvfb :99 -ac -screen 0 1280x1024x24 & export DISPLAY=:99 && node main.js
+# Sử dụng dumb-init để chạy nhiều lệnh đồng thời một cách an toàn
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+
+# Lệnh khởi động: Chạy Xvfb ở background và sau đó chạy bot
+CMD Xvfb :99 -ac -screen 0 1280x1024x24 & node main.js
