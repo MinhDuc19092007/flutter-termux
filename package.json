@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "node-telegram-bot-api": "",
+    "http": "",
+    "https": "",
     "hpack": "",
     "randomstring": "",
     "puppeteer-real-browser": "",
