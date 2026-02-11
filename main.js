@@ -1289,4 +1289,3 @@ console.log(`👑 Admin ID: ${ADMIN_ID}`);
 console.log(`📌 Sử dụng /start để bắt đầu`);
 console.log(`🛡 Blacklist file: ${BLACKLIST_FILE}`);
 console.log(`🌐 Health check: http://localhost:${PORT}`);
-[file content end]
